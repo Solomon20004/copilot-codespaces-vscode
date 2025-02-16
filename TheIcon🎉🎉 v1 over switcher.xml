@@ -1,0 +1,22 @@
+<bot>
+    <api_token>your_deriv_api_token</api_token>
+    <trading_settings>
+        <stake>0.35</stake>
+        <martingale_levels>
+            <level>5</level>
+            <level>7</level>
+        </martingale_levels>
+        <rsi>
+            <period>14</period>
+            <overbought>70</overbought>
+            <oversold>30</oversold>
+        </rsi>
+        <risk_management>
+            <stop_loss>10</stop_loss>
+            <take_profit>20</take_profit>
+        </risk_management>
+    </trading_settings>
+    <websocket>
+        <url>wss://ws.binaryws.com/websockets/v3?app_id=1089</url>
+    </websocket>
+</bot>
