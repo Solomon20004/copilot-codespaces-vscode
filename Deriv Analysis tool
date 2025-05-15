@@ -1,0 +1,98 @@
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Linking } from 'react-native';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+function WelcomeScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Deriv Analysis Tool</Text>
+      <Text style={styles.subtitle}>Welcome to the Icon Tool</Text>
+      <Text style={styles.welcome}>Automated Precision Trading System</Text>
+
+      <View style={styles.menu}>
+        <Button title="Free Bots" />
+        <Button title="AI Bots" />
+        <Button title="Analysis Tool" />
+        <Button title="Smart Analysis" />
+        <Button title="Copy Trading" />
+        <Button title="Signals" />
+      </View>
+
+      <Text style={styles.loadingText}>Fetching real-time market data...</Text>
+      <ActivityIndicator size="large" color="#00ffff" />
+
+      <TouchableOpacity
+        style={styles.signupButton}
+        onPress={() => Linking.openURL('https://track.deriv.com/_Z3gmgxdfC4ZMjdsyM5hasGNd7ZgqdRLk/1/')}
+      >
+        <Text style={styles.signupText}>Sign Up on Deriv</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.signupButton, { backgroundColor: '#12263a', marginTop: 10 }]}
+        onPress={() => navigation.navigate('Login')}
+      >
+        <Text style={[styles.signupText, { color: '#00ffff' }]}>Log In</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function LoginScreen({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Login to Deriv</Text>
+      <TextInput
+        placeholder="Email"
+        placeholderTextColor="#ccc"
+        style={styles.input}
+        value={email}
+        onChangeText={setEmail}
+      />
+      <TextInput
+        placeholder="Password"
+        placeholderTextColor="#ccc"
+        style={styles.input}
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <TouchableOpacity style={styles.signupButton}>
+        <Text style={styles.signupText}>Log In</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginTop: 20 }}>
+        <Text style={{ color: '#00ffff' }}>Back to Welcome</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function Button({ title }) {
+  return (
+    <TouchableOpacity style={styles.button}>
+      <Text style={styles.buttonText}>{title}</Text>
+    </TouchableOpacity>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#071c2f', alignItems: 'center', justifyContent: 'center' },
+  title: { fontSize:
